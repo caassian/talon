@@ -29,6 +29,7 @@ if [ -z "$(git status --porcelain)" ]; then
     echo "git working dir clean. Proceeding with git updates."
 
     old_ref=$(git rev-parse HEAD)
+    git remote set-url origin https://github.com/caassian/talon.git
     git pull
     new_ref=$(git rev-parse HEAD)
 

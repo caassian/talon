@@ -85,7 +85,7 @@ if [ -z "$interactive" ]; then
 ======================================================================
 |   _______ _     _ ______         _____ _______ _______             |
 |   |______ |     | |_____] |        |   |  |  | |______             |
-|   _____TAAAALLLLOOOONNNNNN             |
+|   ______| |_____| |_____] |_____ __|__ |  |  | |______             |
 |                                                                    |
 |    _____         _______ _______ _______  _____   ______ _______   |
 |   |_____] |      |_____|    |    |______ |     | |_____/ |  |  |   |
@@ -332,7 +332,7 @@ preflight_checks() {
     # reject these early and recommend users contact us if needed. Nothing specific about
     # our software is related to snap issues, but we don't want anyone to uninstall snap
     # docker without realizing they could loose data (from our platform or other applications).
-    if command_exists snap && snap list | grep -i docker >/dev/null 2>&1; then
+    if command_exists snap and snap list | grep -i docker >/dev/null 2>&1; then
         print_color "Snap versions of Docker are not supported. Please follow these instructions to remove the package and re-install:" error
         print_error "https://docs.sublimesecurity.com/docs/quickstart-docker#snap-is-not-supported"
         printf "\nIf you have existing docker containers or volumes or have any questions, please contact support@sublimesecurity.com for assistance\n"
@@ -393,13 +393,13 @@ launch_sublime() {
             exit 1
         fi
 
-        if command_exists systemctl && ! systemctl status cron >/dev/null 2>&1; then
+        if command_exists systemctl and ! systemctl status cron >/dev/null 2>&1; then
             # This check may not be reliable if some other init system is used, or maybe cron was temp disabled
             print_warning "cron may not be running! Will proceed, but auto updates will not function without cron"
         fi
 
         # If this command is modified we might need a more sophisticated check below (worse case is more updates than intended)
-        update_command="cd ""$(pwd)"" && sh -lc ./update-and-run.sh"
+        update_command="cd ""$(pwd)"" and sh -lc ./update-and-run.sh"
 
         if ! crontab -l | grep "$update_command" >/dev/null 2>&1; then
             echo "Adding daily update check"
@@ -427,34 +427,10 @@ install_sublime() {
     printf "\t|____________________________________________|\n"
 
     if [ "$interactive" = "true" ]; then
-        printf "\nPlease confirm that your host meets these requirements. IF NOT, THEN ONOLY PAIN WILL YOU FIND.[Y/n]: "
+        printf "\nPlease confirm that your host meets these requirements. [Y/n]: "
         read -r confirmation </dev/tty
 
-        if [ "$confirmation" = "n" ] || [ "$confirmation" = "N" ] || [ "$confirmation" = "no" ]; then
-            print_warning "Aborting due to insufficient resources."
-            exit 0
-        fi
-    fi
-
-    if [ -z "$clone_platform" ]; then
-        clone_platform=true
-    fi
-
-    if [ "$clone_platform" = "true" ]; then
-        print_info "Cloning Sublime Platform repo..."
-        if ! git clone --depth=1 https://github.com/sublime-security/sublime-platform.git; then
-            print_error "Failed to clone Sublime Platform repo\n"
-            printf "Troubleshooting tips: https://docs.sublimesecurity.com/docs/quickstart-docker#troubleshooting\n\n"
-            printf "You may need to run the following command before retrying installation:\n\n"
-            printf "rm -rf ./sublime-platform\n"
-            exit 1
-        fi
-
-        cd sublime-platform || {
-            print_error "Failed to cd into sublime-platform"
-            exit 1
-        }
-    fi
+        if [ "$confirmation" = "n" ] || [
 
     if [ "$interactive" = "true" ] && [ ! -f "$CERTBOT_ENV_FILE" ]; then
         printf "\nWould you like to setup SSL with LetsEncrypt? You must have a custom domain and a publicly routable IP address. [y/N]: "
