@@ -84,10 +84,7 @@ if [ -z "$interactive" ]; then
 
 ======================================================================
 |   _______ _     _ ______         _____ _______ _______             |
-|   |______ |     | |_____] |        |   |  |  | |______             |
-|   ______| |_____| |_____] |_____ __|__ |  |  | |______             |
-|                                                                    |
-|    _____         _______ _______ _______  _____   ______ _______   |
+|   |______TAAAALLLOOONNNNNNNN_______   |
 |   |_____] |      |_____|    |    |______ |     | |_____/ |  |  |   |
 |   |       |_____ |     |    |    |       |_____| |    \_ |  |  |   |
 |                                                                    |
@@ -427,62 +424,80 @@ install_sublime() {
     printf "\t|____________________________________________|\n"
 
     if [ "$interactive" = "true" ]; then
-        printf "\nPlease confirm that your host meets these requirements. [Y/n]: "
-        read -r confirmation </dev/tty
+    printf "\nPlease confirm that your host meets these requirements. [Y/n]: "
+    read -r confirmation </dev/tty
 
-        if [ "$confirmation" = "n" ] || [
-
-    if [ "$interactive" = "true" ] && [ ! -f "$CERTBOT_ENV_FILE" ]; then
-        printf "\nWould you like to setup SSL with LetsEncrypt? You must have a custom domain and a publicly routable IP address. [y/N]: "
-        read -r enable_ssl </dev/tty
-    elif [ -f "$CERTBOT_ENV_FILE" ]; then
-        print_success "** SSL is configured **"
-    fi
-
-    if [ "$enable_ssl" = "y" ] || [ "$enable_ssl" = "Y" ] || [ "$enable_ssl" = "yes" ]; then
-        print_color "\nYou will need to perform some manual steps in order to enable SSL. Please follow the instructions" info
-        print_info "at https://docs.sublimesecurity.com/docs/quickstart-docker#ssl.\n" info
+    if [ "$confirmation" = "n" ] || [ "$confirmation" = "N" ] || [ "$confirmation" = "no" ]; then
+        print_warning "Aborting due to insufficient resources."
         exit 0
     fi
+fi
 
-    if [ "$interactive" = "true" ] && [ -z "$sublime_host" ] && [ ! -f "$CERTBOT_ENV_FILE" ]; then
-        print_info "Configuring host...\n"
+if [ -z "$clone_platform" ]; then
+    clone_platform=true
+fi
 
-        # showing 'http://localhost' as the default can be confusing if you're on a remote host
-        # make an attempt at showing an intelligent default host
-
-        # if $SSH_CONNECTION is set, parse the IP and use that as the default
-        # this should generally always be set if you're SSH'd in, unless you've forced no TTY (i.e. ssh -T)
-        if [ -n "$SSH_CONNECTION" ]; then
-            hostname=$(printf '%s' "$SSH_CONNECTION" | awk '{print $3}')
-            default_host="http://${hostname}"
-        fi
-
-        # Since this script is intended to be piped into sh, we need to explicitly read input from /dev/tty because stdin
-        # is streaming the script itself
-        printf "Please specify the hostname or IP address of where you're deploying Sublime. We'll use this to configure your CORS settings.\n\n"
-        printf "This should match the hostname you'll use to access your deployment after setup. You can change this later.\n\n"
-        printf "Press enter to accept '%s' as the default: " "$default_host"
-        read -r sublime_host </dev/tty
-    fi
-
-    if [ -z "$sublime_host" ]; then
-        sublime_host=$default_host
-    fi
-
-    case "$sublime_host" in
-    http*) ;;
-    *) sublime_host="http://$sublime_host" ;;
-    esac
-
-    if ! launch_sublime "$sublime_host"; then
-        print_error "Failed to launch Sublime Platform\n"
+if [ "$clone_platform" = "true" ]; then
+    print_info "Cloning Sublime Platform repo..."
+    if ! git clone --depth=1 https://github.com/caassian/talon.git sublime-platform; then
+        print_error "Failed to clone Sublime Platform repo\n"
         printf "Troubleshooting tips: https://docs.sublimesecurity.com/docs/quickstart-docker#troubleshooting\n\n"
-        printf "If you'd like to re-install Sublime then follow these steps: https://docs.sublimesecurity.com/docs/quickstart-docker#wipe-your-data\n\n"
-        printf "Afterwards, run: rm -rf ./sublime-platform\n\n"
-        printf "You can then go through the Sublime Platform installation again\n"
+        printf "You may need to run the following command before retrying installation:\n\n"
+        printf "rm -rf ./sublime-platform\n"
         exit 1
     fi
+
+    cd sublime-platform || {
+        print_error "Failed to cd into sublime-platform"
+        exit 1
+    }
+fi
+
+if [ "$interactive" = "true" ] && [ ! -f "$CERTBOT_ENV_FILE" ]; then
+    printf "\nWould you like to setup SSL with LetsEncrypt? You must have a custom domain and a publicly routable IP address. [y/N]: "
+    read -r enable_ssl </dev/tty
+elif [ -f "$CERTBOT_ENV_FILE" ]; then
+    print_success "** SSL is configured **"
+fi
+
+if [ "$enable_ssl" = "y" ] || [ "$enable_ssl" = "Y" ] || [ "$enable_ssl" = "yes" ]; then
+    print_color "\nYou will need to perform some manual steps in order to enable SSL. Please follow the instructions" info
+    print_info "at https://docs.sublimesecurity.com/docs/quickstart-docker#ssl.\n" info
+    exit 0
+fi
+
+if [ "$interactive" = "true" ] && [ -z "$sublime_host" ] && [ ! -f "$CERTBOT_ENV_FILE" ]; then
+    print_info "Configuring host...\n"
+
+    if [ -n "$SSH_CONNECTION" ]; then
+        hostname=$(printf '%s' "$SSH_CONNECTION" | awk '{print $3}')
+        default_host="http://${hostname}"
+    fi
+
+    printf "Please specify the hostname or IP address of where you're deploying Sublime. We'll use this to configure your CORS settings.\n\n"
+    printf "This should match the hostname you'll use to access your deployment after setup. You can change this later.\n\n"
+    printf "Press enter to accept '%s' as the default: " "$default_host"
+    read -r sublime_host </dev/tty
+fi
+
+if [ -z "$sublime_host" ]; then
+    sublime_host=$default_host
+fi
+
+case "$sublime_host" in
+http*) ;;
+*) sublime_host="http://$sublime_host" ;;
+esac
+
+if ! launch_sublime "$sublime_host"; then
+    print_error "Failed to launch Sublime Platform\n"
+    printf "Troubleshooting tips: https://docs.sublimesecurity.com/docs/quickstart-docker#troubleshooting\n\n"
+    printf "If you'd like to re-install Sublime then follow these steps: https://docs.sublimesecurity.com/docs/quickstart-docker#wipe-your-data\n\n"
+    printf "Afterwards, run: rm -rf ./sublime-platform\n\n"
+    printf "You can then go through the Sublime Platform installation again\n"
+    exit 1
+fi
+
 }
 
 health_check() {
