@@ -85,7 +85,7 @@ if [ -z "$interactive" ]; then
 ======================================================================
 |   _______ _     _ ______         _____ _______ _______             |
 |   |______ |     | |_____] |        |   |  |  | |______             |
-|   ______| |_____| |_____] |_____ __|__ |  |  | |______             |
+|   _____TAAAALLLLOOOONNNNNN             |
 |                                                                    |
 |    _____         _______ _______ _______  _____   ______ _______   |
 |   |_____] |      |_____|    |    |______ |     | |_____/ |  |  |   |
@@ -427,7 +427,7 @@ install_sublime() {
     printf "\t|____________________________________________|\n"
 
     if [ "$interactive" = "true" ]; then
-        printf "\nPlease confirm that your host meets these requirements. [Y/n]: "
+        printf "\nPlease confirm that your host meets these requirements. IF NOT, THEN ONOLY PAIN WILL YOU FIND.[Y/n]: "
         read -r confirmation </dev/tty
 
         if [ "$confirmation" = "n" ] || [ "$confirmation" = "N" ] || [ "$confirmation" = "no" ]; then
