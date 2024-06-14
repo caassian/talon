@@ -173,7 +173,7 @@ check_port() {
     # TODO: in future PR, where 'ss' is available: ss -tl4 '( sport = :22 )'
     if open_ports | grep -q "$1"; then
         print_error "Port $1 is already in use\n"
-        echo "If you're unable to free this port, reach out for assistance: support@sublimesecurity.com"
+        echo "If you're unable to free this port, reach out for assistance: support@caassian.com"
         exit 1
     fi
 }
@@ -414,7 +414,7 @@ launch_sublime() {
 }
 
 install_sublime() {
-    print_info "We recommend the following minimum system resources:\n"
+    print_info "Caassian recommends the following minimum system resources:\n"
     printf "\t----------------------------------------------\n"
     printf "\t|  Mailboxes  |   RAM   |  CPUs  |  Storage  |\n"
     printf "\t|---------------------------------------------\n"
