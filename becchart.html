@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(function() { // Delay the animation by 2000 milliseconds
         Highcharts.chart('container', {
           chart: {
-            type: 'line',
+            type: 'area',
             animation: {
               duration: 2000
             }
@@ -50,12 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
             useHTML: true,
             headerFormat: '<small>{point.key}</small><table>',
             pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
-              '<td style="text-align: right"><b>{point.y:.2f} million USD</b></td></tr><tr><td colspan="2">Source: {point.source}</td></tr>',
+              '<td style="text-align: right"><b>{point.y:.2f} million USD</b></td></tr><tr><td colspan="2">Sources: {point.source}</td></tr>',
             footerFormat: '</table>',
             valueDecimals: 2
           },
           plotOptions: {
-            line: {
+            area: {
               dataLabels: {
                 enabled: true
               },
@@ -65,17 +65,17 @@ document.addEventListener('DOMContentLoaded', function() {
           series: [{
             name: 'Average Cost',
             data: [
-              { y: 3.7, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
-              { y: 3.8, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
-              { y: 3.9, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
-              { y: 4.0, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
-              { y: 4.1, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
-              { y: 4.2, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
-              { y: 4.3, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
-              { y: 4.4, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
-              { y: 4.5, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
-              { y: 4.6, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
-              { y: 4.7, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' }
+              { y: 3.7, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
+              { y: 3.8, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
+              { y: 3.9, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
+              { y: 4.0, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
+              { y: 4.0, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
+              { y: 4.0, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
+              { y: 4.3, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
+              { y: 4.4, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
+              { y: 4.3, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
+              { y: 4.6, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
+              { y: 4.7, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' }
             ]
           }],
           credits: {
