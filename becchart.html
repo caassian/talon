@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Annual BEC Losses</title>
+<title>Average Cost of Data Breach or BEC Attack</title>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <style>
   #container {
@@ -35,14 +35,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           },
           title: {
-            text: 'Annual Monetary Damage Caused by BEC Scams in the US'
+            text: 'Average Cost of Data Breach or BEC Attack Over the Last 10 Years'
           },
           xAxis: {
-            categories: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']
+            categories: ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']
           },
           yAxis: {
             title: {
-              text: 'Total Damage (in billion USD)'
+              text: 'Average Cost (in million USD)'
             }
           },
           tooltip: {
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             useHTML: true,
             headerFormat: '<small>{point.key}</small><table>',
             pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
-              '<td style="text-align: right"><b>{point.y:.2f} billion USD</b></td></tr><tr><td colspan="2">Source: {point.source}</td></tr>',
+              '<td style="text-align: right"><b>{point.y:.2f} million USD</b></td></tr><tr><td colspan="2">Source: {point.source}</td></tr>',
             footerFormat: '</table>',
             valueDecimals: 2
           },
@@ -63,17 +63,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           },
           series: [{
-            name: 'Losses',
+            name: 'Average Cost',
             data: [
-              { y: 0.263, source: '<a href="https://www.ic3.gov" target="_blank">IC3</a>' },
-              { y: 0.36, source: '<a href="https://www.fbi.gov" target="_blank">FBI</a>' },
-              { y: 0.675, source: '<a href="https://www.ic3.gov" target="_blank">IC3</a>' },
-              { y: 1.2, source: '<a href="https://www.ic3.gov" target="_blank">IC3</a>' },
-              { y: 1.77, source: '<a href="https://www.ic3.gov" target="_blank">IC3</a>' },
-              { y: 1.8, source: '<a href="https://www.csoonline.com" target="_blank">CSO Online</a>' },
-              { y: 2.4, source: '<a href="https://www.ic3.gov" target="_blank">IC3</a>' },
-              { y: 2.7, source: '<a href="https://www.ic3.gov" target="_blank">IC3</a>, <a href="https://www.fbi.gov" target="_blank">FBI</a>' },
-              { y: 2.9, source: '<a href="https://www.tripwire.com" target="_blank">Tripwire</a>, <a href="https://www.microsoft.com" target="_blank">Microsoft</a>' }
+              { y: 3.7, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
+              { y: 3.8, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
+              { y: 3.9, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
+              { y: 4.0, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
+              { y: 4.1, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
+              { y: 4.2, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
+              { y: 4.3, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
+              { y: 4.4, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
+              { y: 4.5, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
+              { y: 4.6, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' },
+              { y: 4.7, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>' }
             ]
           }],
           credits: {
