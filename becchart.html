@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(function() { // Delay the animation by 2000 milliseconds
         Highcharts.chart('container', {
           chart: {
-            type: 'area',
+            type: 'line',
             animation: {
               duration: 2000
             }
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
             valueDecimals: 2
           },
           plotOptions: {
-            area: {
+            line: {
               dataLabels: {
                 enabled: true
               },
@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
           },
           series: [{
             name: 'Average Cost',
+            color: '#8B0000', // Dark red color
             data: [
               { y: 3.7, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
               { y: 3.8, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
