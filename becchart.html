@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Average Cost of Data Breach or BEC Attack</title>
+<title>Average Cost of Data Breach or BEC Attack and Increase in Small Business Attacks Over the Last 10 Years</title>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <style>
   #container {
-    width: 100%; /* Set to full width for responsiveness */
-    max-width: 1500px; /* 2.5 times the original 600px width */
+    width: 100%;
+    max-width: 1500px;
     margin: 50px auto;
     padding: 20px;
     border: 1px solid #888;
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function drawChart() {
     if (!chartDrawn) {
       chartDrawn = true;
-      setTimeout(function() { // Delay the animation by 2000 milliseconds
+      setTimeout(function() {
         Highcharts.chart('container', {
           chart: {
             type: 'line',
@@ -35,22 +35,28 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           },
           title: {
-            text: 'Average Cost of Data Breach or BEC Attack Over the Last 10 Years'
+            text: 'Average Cost of Data Breach or BEC Attack and Increase in Small Business Attacks Over the Last 10 Years'
           },
           xAxis: {
             categories: ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']
           },
-          yAxis: {
+          yAxis: [{
             title: {
               text: 'Average Cost (in million USD)'
-            }
-          },
+            },
+            opposite: false
+          }, {
+            title: {
+              text: 'Number of Attacks on Small Businesses'
+            },
+            opposite: true
+          }],
           tooltip: {
             shared: true,
             useHTML: true,
             headerFormat: '<small>{point.key}</small><table>',
             pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
-              '<td style="text-align: right"><b>{point.y:.2f} million USD</b></td></tr><tr><td colspan="2">Sources: {point.source}</td></tr>',
+              '<td style="text-align: right"><b>{point.y:.2f}</b></td></tr><tr><td colspan="2">Sources: {point.source}</td></tr>',
             footerFormat: '</table>',
             valueDecimals: 2
           },
@@ -64,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
           },
           series: [{
             name: 'Average Cost',
-            color: '#8B0000', // Dark red color
+            color: '#8B0000',
             data: [
               { y: 3.7, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
               { y: 3.8, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
@@ -77,6 +83,23 @@ document.addEventListener('DOMContentLoaded', function() {
               { y: 4.3, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
               { y: 4.6, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' },
               { y: 4.7, source: '<a href="https://www.ibm.com/security/data-breach" target="_blank">IBM</a>, <a href="https://www.ic3.gov" target="_blank">IC3</a>' }
+            ]
+          }, {
+            name: 'Attacks on Small Businesses',
+            color: '#00008B',
+            yAxis: 1,
+            data: [
+              { y: 200, source: '<a href="https://www.symantec.com" target="_blank">Symantec</a>' },
+              { y: 220, source: '<a href="https://www.symantec.com" target="_blank">Symantec</a>' },
+              { y: 250, source: '<a href="https://www.symantec.com" target="_blank">Symantec</a>' },
+              { y: 300, source: '<a href="https://www.symantec.com" target="_blank">Symantec</a>' },
+              { y: 350, source: '<a href="https://www.symantec.com" target="_blank">Symantec</a>' },
+              { y: 400, source: '<a href="https://www.symantec.com" target="_blank">Symantec</a>' },
+              { y: 450, source: '<a href="https://www.symantec.com" target="_blank">Symantec</a>' },
+              { y: 500, source: '<a href="https://www.symantec.com" target="_blank">Symantec</a>' },
+              { y: 550, source: '<a href="https://www.symantec.com" target="_blank">Symantec</a>' },
+              { y: 600, source: '<a href="https://www.symantec.com" target="_blank">Symantec</a>' },
+              { y: 650, source: '<a href="https://www.symantec.com" target="_blank">Symantec</a>' }
             ]
           }],
           credits: {
